@@ -1,0 +1,84 @@
+#include <stdio.h>
+
+struct node
+{
+  int data;
+  struct node* llink;
+  struct node *rlink;
+};
+struct node *temp=NULL,*root=NULL;
+
+
+int isrightchild(struct node* tree)
+{ int ch;
+  printf("Do you want to create a right child\n");
+  printf("Choose 0 or 1");
+  scanf("%d",&ch);
+  if(ch==1)
+  return 1;
+  else return 0;
+}
+
+int isleftchild(struct node* tree)
+{ int ch;
+  printf("Do you want to create a left child\n");
+  printf("Choose 0 or 1");
+  scanf("%d",&ch);
+  if(ch==1)
+  return 1;
+  else return 0;
+}
+
+
+void create(struct node* tree)
+{ if(isleftchild(tree)==1)
+  { temp=(struct node *)malloc(sizeof(struct node));
+    printf("Enter node data\n");
+    scanf("%d",&temp->data);
+    tree->llink=temp;
+    create(temp);
+  }
+ else tree->llink=NULL;
+
+if(isrightchild(tree)==1)
+  { temp=(struct node *)malloc(sizeof(struct node));
+    printf("Enter node data\n");
+    scanf("%d",&temp->data);
+    tree->rlink=temp;
+    create(temp);
+  }
+ else tree->rlink=NULL;
+}
+
+void preorder(struct node *tree)
+{ if(tree!=NULL)
+   { printf("%d-->",tree->data);
+       preorder(tree->llink);
+     
+     preorder(tree->rlink);
+   }
+}
+
+
+void main()
+{ root=(struct node *)malloc(sizeof(struct node));
+  printf("Enter root data\n");
+  scanf("%d",&root->data);
+  root->llink=NULL;
+  root->rlink==NULL;
+  create(root);
+  printf("The preorder display of the tree is:\n");
+  preorder(root);
+}  
+
+
+
+
+
+
+
+
+
+
+
+
