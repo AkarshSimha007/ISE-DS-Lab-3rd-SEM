@@ -1,0 +1,106 @@
+#include<stdio.h>
+#include<stdlib.h>
+struct node
+{ int data;
+  struct node* llink;
+  struct node* rlink;
+};
+struct node *temp=NULL,*root=NULL;
+ 
+int is_leftchild(struct node *tree)
+{ int ch;
+  printf("Do you want to create a left child\n");
+  printf("Enter 1 for yes ,0 for no\n");
+  scanf("%d",&ch);
+  if(ch==1)
+  return 1;
+  else return 0;
+}
+
+int is_rightchild(struct node* tree)
+{
+  int ch;
+  printf("Do you want to create a right child\n");
+  printf("Enter 1 for yes ,0 for no\n");
+  scanf("%d",&ch);
+  if(ch==1)
+  return 1;
+  else return 0;
+}
+
+void create(struct node *tree)
+{ if(is_leftchild(tree)==1)
+  {
+    temp=(struct node*)malloc(sizeof(struct node));
+    printf("Enter left node data\n");
+    scanf("%d",&temp->data);
+   
+    tree->llink=temp;
+    create(temp);
+  }
+  else tree->llink=NULL;
+
+  if(is_rightchild(tree)==1)
+  { temp=(struct node*)malloc(sizeof(struct node));
+    printf("Enter right node data\n");
+    scanf("%d",&temp->data);
+    
+    tree->rlink=temp;
+    create(temp);
+  }
+    else tree->rlink=NULL;
+
+}
+
+void inorder(struct node* tree)
+{
+  if(tree!=NULL)
+  {
+    inorder(tree->llink);
+    printf("%d->",tree->data);
+    inorder(tree->rlink);
+  }
+}
+
+void preorder(struct node* tree)
+{
+  if(tree!=NULL)
+  { 
+    printf("%d->",tree->data);
+    preorder(tree->llink);
+    preorder(tree->rlink);
+  }
+}
+
+void postorder(struct node* tree)
+{
+  if(tree!=NULL)
+  {
+    postorder(tree->llink);
+    postorder(tree->rlink);
+    printf("%d->",tree->data);
+  }
+}
+
+
+int main()
+{
+  root=(struct node*)malloc(sizeof(struct node));
+  printf("Enter root node data\n");
+  scanf("%d",&root->data);
+  root->llink=NULL;
+  root->rlink=NULL;
+  create(root);
+   printf("The inorder display of the tree is:\n");
+   inorder(root);
+   printf("\n");
+   
+   printf("The preorder display of the tree is:\n");
+   preorder(root);
+   printf("\n");
+
+   printf("The postorder display of the tree is:\n");
+   postorder(root);
+   printf("\n");
+
+}
