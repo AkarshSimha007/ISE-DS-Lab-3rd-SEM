@@ -1,4 +1,4 @@
-//Circulat Linked List
+//Circular Linked List
 #include<stdio.h>
 #include<malloc.h>
 #include<stdlib.h>
