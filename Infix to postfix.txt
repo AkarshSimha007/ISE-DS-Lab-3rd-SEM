@@ -1,0 +1,112 @@
+#include<stdio.h>
+#include<string.h>
+
+#define SIZE 30;
+char s[SIZE],infix[SIZE],postfix[SIZE],temp,ch;
+int top=-1,i=0,j=0;
+
+void push(char ch)
+{ top=top+1;
+  s[top]=ch;
+}
+
+char pop(char ch)
+{ char temp;
+  temp=s[top--];
+  return temp;
+}
+
+
+int isoperator(char ch)
+{if(ch=='*'||ch=='+'||ch=='-'||ch=='/'||ch=='^')
+ return 1;
+ else return 0;
+}
+  
+
+int precedence(char ch)
+{ switch(ch)
+  { case '^': return 4;
+    case '*':
+    case '/':return 3;
+    case '+':
+    case '-':return 2;
+    default: return 1;
+  }
+}
+
+
+void main()
+{ printf("Enter the infix expression\n");
+  gets(infix);
+  while(infix[i]!='\0')
+ { ch=infix[i];
+   if(isalpha(ch))
+    { postfix[j]=ch;
+      j++;
+    }
+  else if(ch=='(')
+ { push();
+ }
+  
+ else if(isoperator(ch)==1)
+{ if(ch!='^')
+  { while(top!=-1&& precedence(s[top])>=precedence(ch))
+    {postfix[j]=pop();
+      j++;
+    }
+  }
+  push(ch);
+}
+
+else if(ch==')')
+{ while(s[top]!='(')
+ { postfix[j]=pop();
+   j++;
+ }
+ temp=pop();
+}
+
+else
+{ printf("Invalid  Character\n");
+ i++;
+}
+
+while(top>-1)
+{ postfix[j]=pop();
+  j++;
+}
+postfix[j]='\0';
+printf("Postfix expression is %s",postfix);
+
+}
+
+
+ 
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

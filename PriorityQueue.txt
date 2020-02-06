@@ -1,0 +1,85 @@
+#include<stdio.h>
+#define MAX 30
+int PQ[MAX],i,data,front=-1,rear=-1;
+
+void insertpriority()
+{ printf("Enter Data to be inserted\n");
+  scanf("%d",&data);
+    if(rear==MAX-1)
+  { printf("Queue is Full!\n");
+    return;
+  }
+  
+  else if(rear==-1)
+  { front=0;
+    rear=0;
+   PQ[rear]=data; 
+   return;
+  }
+  else 
+  check(data);
+  rear++;
+}
+
+void checkdata(int data)
+{
+    for(i=front;i<=rear;i++)
+  {  if(data>PQ[i])
+    { for(j=rear;j>=i;j--)
+      PQ[j+1]=PQ[j];
+    }
+  PQ[i]=data;
+  return;
+  }
+ PQ[i]=data;
+}
+
+
+void delete()
+{
+      if(front==-1)
+    printf("Queue is empty\n");
+    else
+    { ditem=PQ[front];
+     printf("Deleted element is %d",ditem);
+     if(front==rear)
+     {front=rear=-1;
+     }
+     else
+     front++;
+    }
+}
+
+
+void display()
+{  if(front==-1)
+    printf("Queue is empty\n");
+    else
+    {
+        for(i=front;i<=rear;i++)
+        printf("%d",PQ[i]);
+    }
+}
+    
+    
+    void main()
+    {
+        int ch;
+        while(1)
+        {
+            printf("1.Insert\n2.Delete\n3.Display\4.Exit\n");
+            scanf("%d",&ch);
+            switch(ch)
+            {
+                case 1:insertpriority();break;
+                case 2:delete();break;
+                case 3:display();break;
+                case 4:exit(0);
+                default:printf("Enter valid option\n");
+            }
+        }
+    }
+    
+            }
+        }
+    }
