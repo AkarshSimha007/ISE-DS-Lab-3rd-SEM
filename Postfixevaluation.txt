@@ -1,0 +1,53 @@
+#include<stdio.h>
+#include<string.h>
+#define MAX 30
+char postfix[MAX],ch;
+int j,top=-1,op2,op1,res;
+
+void push(char ch)
+{
+    s[++top]=num;
+}
+
+int pop()
+{
+    return (s[top--]);
+}
+
+int main()
+{
+    printf("Enter the postfix expression\n");
+    gets(postfix);
+    while(postfix[j]!='\0')
+    {
+        ch=postfix[j];
+        if(isalpha(ch))
+        {
+            printf("Enter the value of %c:",ch);
+            scanf("%d",&num);
+            push(num);
+        }
+        else
+        {
+            op2=pop();
+            op1=pop();
+            switch(ch)
+            {
+                case '+':res=op1+op2;
+                         push(res);
+                         break;
+                case '-':res=op1-op2;
+                         push(res);
+                         break;
+                case '*':res=op1*op2;
+                         push(res);
+                         break;
+                case '/':res=op1/op2;
+                         push(res);
+                         break;
+            }
+        }
+        j++;
+    }
+    printf("Output is:%d",s[top]);
+}

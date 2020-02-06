@@ -1,0 +1,70 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+struct node
+{ int data;
+  struct node *link;
+};
+struct node *root=NULL;
+struct node *temp,*ptr=NULL;
+
+void create()
+{
+  temp=(struct node *)malloc(sizeof(struct node));
+  printf("Enter the data\n");
+  scanf("%d",&temp->data);
+     if(root==NULL)
+     { 
+	     root=temp;
+     }
+   else 
+  { ptr=root;
+     while(ptr->link!= NULL)
+      { ptr=ptr->link;
+      }
+      ptr->link=temp;
+      temp->link=NULL;
+  }
+}
+
+void delany()
+{ if(root==NULL)
+   return;
+  struct node *prev=root;
+  struct node *node=root->link;
+  while(prev!=NULL&&node!=NULL)
+ { prev->link=node->link;
+   free(node);
+   prev=prev->link;
+   if(prev!=NULL)
+   node=prev->link;
+ }
+}
+
+int main()
+{  int a,i;
+	printf("Enter the number of nodes\n");
+	scanf("%d",&a);
+	for(i=0;i<a;i++)
+	{
+  	  create();
+	}
+ printf("Original list is\n");
+  temp=root;
+  while(temp->link!=NULL)
+ { printf("%d\n",temp->data);
+   temp=temp->link;
+ } printf("%d",temp->data);
+printf("\n");
+
+
+      delany();
+      temp=root;
+     printf("Output is\n");
+  while(temp->link!=NULL)
+ { printf("%d\n",temp->data);
+   temp=temp->link;
+ }
+ printf("%d",temp->data);
+printf("\n");
+}
